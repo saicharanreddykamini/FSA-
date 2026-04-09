@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Student Management</title>
+</head>
+<body>
+
+<h2>Student List</h2>
+
+<a href="/showNewStudentForm">Add Student</a>
+
+<br><br>
+
+<table border="1">
+<tr>
+<th>Name</th>
+<th>Department</th>
+<th>Age</th>
+<th>Marks</th>
+<th>Action</th>
+</tr>
+
+<tr th:each="student : ${studentList}">
+<td th:text="${student.name}"></td>
+<td th:text="${student.department}"></td>
+<td th:text="${student.age}"></td>
+<td th:text="${student.marks}"></td>
+<td>
+<a th:href="@{/deleteStudent/{id}(id=${student.id})}">Delete</a>
+</td>
+</tr>
+</table>
+
+<br>
+
+<div>
+<a th:if="${currentPage > 0}" 
+   th:href="@{/page/{pageNo}(pageNo=${currentPage - 1})}">
+   Previous
+</a>
+
+<span th:text="${currentPage + 1}"></span>
+
+<a th:if="${currentPage < totalPages - 1}" 
+   th:href="@{/page/{pageNo}(pageNo=${currentPage + 1})}">
+   Next
+</a>
+</div>
+
+</body>
+</html>
