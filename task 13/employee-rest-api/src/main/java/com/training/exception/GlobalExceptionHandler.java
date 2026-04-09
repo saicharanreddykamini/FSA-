@@ -1,0 +1,14 @@
+@RestControllerAdvice
+public class GlobalExceptionHandler {
+
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<?> handleNotFound(ResourceNotFoundException ex){
+
+        Map<String,Object> error=new LinkedHashMap<>();
+        error.put("timestamp",LocalDateTime.now());
+        error.put("status",404);
+        error.put("message",ex.getMessage());
+
+        return new ResponseEntity<>(error,HttpStatus.NOT_FOUND);
+    }
+}
